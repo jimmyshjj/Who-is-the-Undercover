@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { apiKeyStorage, globalStorage, lastChatId, getChat, started, setGlobalSettingValueByKey, checkStateChange } from './Storage.svelte'
+  import { checkStateChange as _checkStateChange } from './Storage.svelte'
   import Footer from './Footer.svelte'
   import { replace } from 'svelte-spa-router'
   import { afterUpdate, onMount } from 'svelte'
@@ -221,7 +221,7 @@
     <article class="message is-info">
       <div class="message-body">
         Select an existing chat on the sidebar, or
-        <a href={'#/chat/new'}>create a new chat</a>
+        <a href="#/chat/new">create a new chat</a>
       </div>
     </article>
   {/if}
