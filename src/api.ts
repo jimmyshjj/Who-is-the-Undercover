@@ -9,7 +9,7 @@ import type {
   WordPair
 } from './types'
 
-type ChatMessage = {
+interface ChatMessage {
   role: 'system' | 'user' | 'assistant'
   content: string
 }
@@ -34,7 +34,7 @@ const parseFirstJson = <T>(raw: string): T => {
 
 const timeoutFetch = async (input: RequestInfo | URL, init: RequestInit, timeoutMs: number) => {
   const controller = new AbortController()
-  const timer = window.setTimeout(() => controller.abort(), timeoutMs)
+  const timer = window.setTimeout(() => { controller.abort() }, timeoutMs)
   try {
     return await fetch(input, { ...init, signal: controller.signal })
   } finally {

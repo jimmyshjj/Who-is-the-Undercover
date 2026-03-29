@@ -396,13 +396,13 @@
 
   const translatePhase = (phase: string): string => {
     const phaseMap: Record<string, string> = {
-      'setup': '初始化',
-      'description': '游戏描述',
-      'discussion': '自由讨论',
-      'vote': '投票环节',
-      'night': '夜晚行动',
-      'daytalk': '白天发言',
-      'result': '结果揭晓'
+      setup: '初始化',
+      description: '游戏描述',
+      discussion: '自由讨论',
+      vote: '投票环节',
+      night: '夜晚行动',
+      daytalk: '白天发言',
+      result: '结果揭晓'
     }
     return phaseMap[phase] || phase
   }

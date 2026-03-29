@@ -10,7 +10,7 @@
     "build:github": "vite build --base=/chatgpt-web/",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "lint": "eslint . --fix"
+    "lint": "eslint src --ext .ts,.svelte --fix"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.5.2",

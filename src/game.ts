@@ -21,14 +21,14 @@ import type {
   WinnerInfo
 } from './types'
 
-type RuntimeContext = {
+interface RuntimeContext {
   settings: AppSettings
   customWordbanks: Record<string, Wordbank>
   scoreboard: Scoreboard
   history: GameState[]
 }
 
-type HumanActionInput = {
+interface HumanActionInput {
   publicLine?: string
   privateNote?: string
   speak?: boolean
@@ -349,7 +349,7 @@ const normalizeVoteTarget = (target: string, allowedTargets: string[]) => {
 const maybeResolveGuess = async (game: GameState, context: RuntimeContext, player: Player, guessWords: GuessWords): Promise<boolean> => {
   if (!guessWords || player.role !== 'fool' || !player.isAlive) return false
   recordHiddenEvent(game, player, 'guess', 'submitted guess', JSON.stringify(guessWords))
-  
+
   // 猜词裁定失败时抛出特殊错误，让外层暂停游戏等待重试
   let result
   try {
@@ -361,7 +361,7 @@ const maybeResolveGuess = async (game: GameState, context: RuntimeContext, playe
     const message = error instanceof Error ? error.message : 'UnknownError'
     throw new Error(`JUDGE_GUESS_FAILED::${player.name} 的猜词裁定失败，请点击"继续"重试。原因：${message}`)
   }
-  
+
   if (result.success) {
     recordHiddenEvent(game, player, 'guess', 'guess success', JSON.stringify(guessWords))
     game.phase = 'result'
@@ -550,7 +550,7 @@ const settleDiscussionBatch = async (game: GameState, context: RuntimeContext, a
   if (finalizeGameIfNeeded(game)) return
   for (const player of getAlivePlayers(game)) {
     const action = actionMap.get(player.id) as DiscussionAction | undefined
-    if (!action || !action.speak || !action.public_line.trim()) continue
+    if (!action?.speak || !action.public_line.trim()) continue
     addPublicMessage(game, player.id, player.name, 'discussion', 'player', action.public_line.trim())
   }
 }
@@ -618,7 +618,7 @@ const settleNightBatch = async (game: GameState, context: RuntimeContext, action
   for (const playerId of aliveAtSettlement) {
     const player = getPlayerById(game, playerId)
     const action = actionMap.get(player.id) as NightAction | undefined
-    if (!action || !action.knife) continue
+    if (!action?.knife) continue
     if (player.role !== 'undercover') {
       deaths.set(player.id, 'suicide')
       continue
@@ -627,7 +627,7 @@ const settleNightBatch = async (game: GameState, context: RuntimeContext, action
   }
 
   const deathList = [...deaths.entries()]
-  deathList.forEach(([playerId, type]) => markEliminated(game, playerId, type))
+  deathList.forEach(([playerId, type]) => { markEliminated(game, playerId, type) })
   for (const player of game.players) {
     const action = actionMap.get(player.id) as NightAction | undefined
     if (action) {
@@ -901,7 +901,7 @@ export const submitHumanAction = async (
     return { game, scoreboard }
   }
 
-  return runGame(game, { ...context, scoreboard }, options)
+  return await runGame(game, { ...context, scoreboard }, options)
 }
 
 export const revealSecret = (player: Player) => {

@@ -26,7 +26,7 @@ export type GuessWords = {
   word_b: string
 } | null
 
-export type AppSettings = {
+export interface AppSettings {
   baseUrl: string
   apiKey: string
   rememberApiKey: boolean
@@ -39,7 +39,7 @@ export type AppSettings = {
   promptTemplates: PromptTemplates
 }
 
-export type PromptTemplates = {
+export interface PromptTemplates {
   hostSetupSystem: string
   hostSetupUser: string
   hostJudgeSystem: string
@@ -50,7 +50,7 @@ export type PromptTemplates = {
   playerUser: string
 }
 
-export type GameConfig = {
+export interface GameConfig {
   theme: ThemeKey
   customThemeLabel?: string
   excludeCommonWords: boolean
@@ -64,12 +64,12 @@ export type GameConfig = {
   customWordbankId?: string
 }
 
-export type PlayerSecret = {
+export interface PlayerSecret {
   type: SecretType
   value: string | string[] | null
 }
 
-export type Player = {
+export interface Player {
   id: string
   name: string
   seat: number
@@ -82,7 +82,7 @@ export type Player = {
   modelOverride: string
 }
 
-export type PublicMessage = {
+export interface PublicMessage {
   id: string
   round: number
   phase: GamePhase
@@ -93,19 +93,19 @@ export type PublicMessage = {
   createdAt: string
 }
 
-export type WordPair = {
+export interface WordPair {
   goodWord: string
   undercoverWord: string
   domainHint: string
 }
 
-export type Wordbank = {
+export interface Wordbank {
   id: string
   name: string
   pairs: WordPair[]
 }
 
-export type DebugLog = {
+export interface DebugLog {
   id: string
   playerId: string
   round: number
@@ -115,7 +115,7 @@ export type DebugLog = {
   createdAt: string
 }
 
-export type HiddenEvent = {
+export interface HiddenEvent {
   id: string
   round: number
   phase: GamePhase
@@ -127,7 +127,7 @@ export type HiddenEvent = {
   createdAt: string
 }
 
-export type ScoreRow = {
+export interface ScoreRow {
   playerName: string
   winRounds: number
   loseRounds: number
@@ -135,18 +135,18 @@ export type ScoreRow = {
 
 export type Scoreboard = Record<string, ScoreRow>
 
-export type WordPairState = {
+export interface WordPairState {
   goodWord: string
   undercoverWord: string
 }
 
-export type WinnerInfo = {
+export interface WinnerInfo {
   camp: WinnerCamp
   label: string
   playerIds: string[]
 }
 
-export type HumanActionRequest = {
+export interface HumanActionRequest {
   playerId: string
   kind: 'description' | 'discussion' | 'day_talk' | 'vote' | 'night'
   title: string
@@ -156,12 +156,12 @@ export type HumanActionRequest = {
   subRound: number
 }
 
-export type VoteState = {
+export interface VoteState {
   attempt: number
   allowedTargets: string[]
 }
 
-export type GameState = {
+export interface GameState {
   gameId: string
   status: GameStatus
   round: number
@@ -186,7 +186,7 @@ export type GameState = {
   historyLabel: string
 }
 
-export type ExportBlob = {
+export interface ExportBlob {
   version: number
   settings: AppSettings
   config?: GameConfig
@@ -196,14 +196,14 @@ export type ExportBlob = {
   customWordbanks: Record<string, Wordbank>
 }
 
-export type DescriptionAction = {
+export interface DescriptionAction {
   kind: 'description'
   public_line: string
   private_note: string
   guess_words: GuessWords
 }
 
-export type DiscussionAction = {
+export interface DiscussionAction {
   kind: 'discussion'
   speak: boolean
   public_line: string
@@ -211,14 +211,14 @@ export type DiscussionAction = {
   guess_words: GuessWords
 }
 
-export type DayTalkAction = {
+export interface DayTalkAction {
   kind: 'day_talk'
   public_line: string
   private_note: string
   guess_words: GuessWords
 }
 
-export type VoteAction = {
+export interface VoteAction {
   kind: 'vote'
   vote_target: string
   private_note: string
@@ -226,7 +226,7 @@ export type VoteAction = {
   guess_words: GuessWords
 }
 
-export type NightAction = {
+export interface NightAction {
   kind: 'night'
   knife: boolean
   knife_target: string | null
@@ -236,18 +236,18 @@ export type NightAction = {
 
 export type PlayerAction = DescriptionAction | DiscussionAction | DayTalkAction | VoteAction | NightAction
 
-export type SetupResult = {
+export interface SetupResult {
   good_word: string
   undercover_word: string
   domain_hint: string
   opening_line?: string
 }
 
-export type GuessJudgeResult = {
+export interface GuessJudgeResult {
   success: boolean
   reason: string
 }
 
-export type FlavorResult = {
+export interface FlavorResult {
   line: string
 }

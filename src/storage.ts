@@ -129,22 +129,22 @@ export const saveConfig = (config: GameConfig) => {
   writeJson(STORAGE_KEYS.config, config)
 }
 
-export const loadCurrentGame= (): GameState | null => readJson<GameState | null>(STORAGE_KEYS.currentGame, null)
+export const loadCurrentGame = (): GameState | null => readJson<GameState | null>(STORAGE_KEYS.currentGame, null)
 
-export const saveCurrentGame = (game: GameState | null) => writeJson(STORAGE_KEYS.currentGame, game)
+export const saveCurrentGame = (game: GameState | null) => { writeJson(STORAGE_KEYS.currentGame, game) }
 
 export const loadHistory = (): GameState[] => readJson<GameState[]>(STORAGE_KEYS.history, [])
 
-export const saveHistory = (history: GameState[]) => writeJson(STORAGE_KEYS.history, history.slice(0, 50))
+export const saveHistory = (history: GameState[]) => { writeJson(STORAGE_KEYS.history, history.slice(0, 50)) }
 
 export const loadScoreboard = (): Scoreboard => readJson<Scoreboard>(STORAGE_KEYS.scoreboard, {})
 
-export const saveScoreboard = (scoreboard: Scoreboard) => writeJson(STORAGE_KEYS.scoreboard, scoreboard)
+export const saveScoreboard = (scoreboard: Scoreboard) => { writeJson(STORAGE_KEYS.scoreboard, scoreboard) }
 
 export const loadCustomWordbanks = (): Record<string, Wordbank> =>
   readJson<Record<string, Wordbank>>(STORAGE_KEYS.customWordbanks, {})
 
-export const saveCustomWordbanks = (banks: Record<string, Wordbank>) => writeJson(STORAGE_KEYS.customWordbanks, banks)
+export const saveCustomWordbanks = (banks: Record<string, Wordbank>) => { writeJson(STORAGE_KEYS.customWordbanks, banks) }
 
 export const buildExportBlob = (
   settings: AppSettings,
