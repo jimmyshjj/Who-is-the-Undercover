@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev:public": "vite --host 0.0.0.0",
     "build": "vite build",
-    "build:github": "vite build --base=/chatgpt-web/",
+    "build:github": "vite build --base=/Who-is-the-Undercover/",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint src --ext .ts,.svelte --fix"

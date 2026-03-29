@@ -43,5 +43,5 @@ module.exports = {
   settings: {
     'svelte3/typescript': true
   },
-  ignorePatterns: ['node_modules/*', 'dist/*', 'src-tauri/*', '抢救/**', '.eslintrc.cjs', '*.json']
+  ignorePatterns: ['node_modules/*', 'dist/*', 'src-tauri/*', '.eslintrc.cjs', '*.json']
 }
